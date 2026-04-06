@@ -1,4 +1,4 @@
-<!doctype html>
+\<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
     <link
       rel="icon"
       type="image/svg+xml"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23020208'/%3E%3Cpolygon points='16,3 29,10 29,22 16,29 3,22 3,10' fill='none' stroke='%2300f5ff' stroke-width='1.5' opacity='.9'/%3E%3Cpolygon points='16,7 25,12 25,20 16,25 7,20 7,12' fill='%2300f5ff' opacity='.08'/%3E%3Cline x1='16' y1='3' x2='16' y2='7' stroke='%2300f5ff' stroke-width='1'/%3E%3Cline x1='16' y1='25' x2='16' y2='29' stroke='%2300f5ff' stroke-width='1'/%3E%3Cline x1='29' y1='10' x2='25' y2='12' stroke='%2300f5ff' stroke-width='1'/%3E%3Cline x1='29' y1='22' x2='25' y2='20' stroke='%2300f5ff' stroke-width='1'/%3E%3Cline x1='3' y1='10' x2='7' y2='12' stroke='%2300f5ff' stroke-width='1'/%3E%3Cline x1='3' y1='22' x2='7' y2='20' stroke='%2300f5ff' stroke-width='1'/%3E%3Ccircle cx='16' cy='16' r='4' fill='none' stroke='%23ff0080' stroke-width='1.5'/%3E%3Ccircle cx='16' cy='16' r='1.5' fill='%23ff0080'/%3E%3Cline x1='16' y1='12' x2='16' y2='7' stroke='%23ff0080' stroke-width='.8' opacity='.6'/%3E%3Cline x1='19.46' y1='14' x2='23.5' y2='11.5' stroke='%23ff0080' stroke-width='.8' opacity='.6'/%3E%3Cline x1='19.46' y1='18' x2='23.5' y2='20.5' stroke='%23ff0080' stroke-width='.8' opacity='.6'/%3E%3Cline x1='16' y1='20' x2='16' y2='25' stroke='%23ff0080' stroke-width='.8' opacity='.6'/%3E%3Cline x1='12.54' y1='18' x2='8.5' y2='20.5' stroke='%23ff0080' stroke-width='.8' opacity='.6'/%3E%3Cline x1='12.54' y1='14' x2='8.5' y2='11.5' stroke='%23ff0080' stroke-width='.8' opacity='.6'/%3E%3Crect x='1' y='1' width='4' height='4' fill='none' stroke='%2300f5ff' stroke-width='.8' opacity='.5'/%3E%3Crect x='27' y='1' width='4' height='4' fill='none' stroke='%2300f5ff' stroke-width='.8' opacity='.5'/%3E%3Crect x='1' y='27' width='4' height='4' fill='none' stroke='%2300f5ff' stroke-width='.8' opacity='.5'/%3E%3Crect x='27' y='27' width='4' height='4' fill='none' stroke='%2300f5ff' stroke-width='.8' opacity='.5'/%3E%3C/svg%3E"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23020208'/%3E%3Cpolygon points='16,2 28,9 28,23 16,30 4,23 4,9' fill='%23020208' stroke='%2300f5ff' stroke-width='2.2'/%3E%3Ccircle cx='16' cy='16' r='5.5' fill='none' stroke='%23ff0080' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='2.2' fill='%23ff0080'/%3E%3C/svg%3E"
     />
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap");
@@ -1408,6 +1408,14 @@
       <div class="tsep"></div>
       <button class="cb" id="btnExport">↓ CSV</button>
       <button class="cb" id="btnImport">↑ CSV</button>
+      <button
+        class="cb"
+        id="btnDelete"
+        style="border-color: var(--p); color: var(--p)"
+        title="Reset all data"
+      >
+        ✕ DELETE
+      </button>
       <input type="file" id="csvFile" accept=".csv" style="display: none" />
 
       <div class="tsep"></div>
@@ -2406,10 +2414,99 @@
         if (el) el.remove();
       }
 
+      function openDeleteModal() {
+        const bg = document.createElement("div");
+        bg.className = "modal-bg";
+        bg.id = "modal-delete";
+        bg.innerHTML = `<div class="modal" style="border-color:var(--p);box-shadow:0 0 60px rgba(255,0,128,.2)">
+    <div class="co tl" style="border-color:var(--p)"></div>
+    <div class="co tr" style="border-color:var(--p)"></div>
+    <div class="co bl" style="border-color:var(--p)"></div>
+    <div class="co br" style="border-color:var(--p)"></div>
+    <button class="modal-close" onclick="closeModal('modal-delete')">✕</button>
+    <div class="modal-title" style="color:var(--p);text-shadow:0 0 10px var(--p)">⚠ PURGE DATABASE</div>
+    <div class="modal-sub" style="line-height:1.9">
+      This will <span style="color:var(--p)">permanently erase</span> all blocks,<br>
+      balance, energy and settings.<br><br>
+      Type <span style="color:var(--y);font-family:'Orbitron',sans-serif;letter-spacing:2px">SUBMIT</span> to confirm:
+    </div>
+    <input class="modal-input" id="mDeleteIn" type="text" placeholder="SUBMIT"
+      autocomplete="off" spellcheck="false"
+      style="text-transform:uppercase;border-color:rgba(255,0,128,.4);color:var(--p)"
+      oninput="document.getElementById('mDeleteConfirm').disabled=this.value.trim().toUpperCase()!=='SUBMIT'">
+    <div class="modal-btns">
+      <button class="cb" onclick="closeModal('modal-delete')">CANCEL</button>
+      <button class="cb pk" id="mDeleteConfirm" disabled onclick="confirmDelete()">✕ PURGE</button>
+    </div>
+  </div>`;
+        bg.addEventListener("click", (e) => {
+          if (e.target === bg) closeModal("modal-delete");
+        });
+        document.body.appendChild(bg);
+        setTimeout(() => {
+          const i = document.getElementById("mDeleteIn");
+          if (i) {
+            i.focus();
+          }
+        }, 50);
+      }
+
+      function confirmDelete() {
+        closeModal("modal-delete");
+        // Wipe localStorage keys
+        [
+          "cm_name",
+          "cm_balance",
+          "cm_mined",
+          "cm_zoom",
+          "cm_textScale",
+          "cm_energy",
+          "cm_difficulty",
+          "cm_blocks",
+        ].forEach((k) => localStorage.removeItem(k));
+        // Reset state
+        S.name = "YMG";
+        S.balance = 0;
+        S.mined = 0;
+        S.blocks = new Map();
+        S.nextMsg = "";
+        S.zoom = 2.5;
+        S.textScale = 1.75;
+        S.energy = 10000;
+        S.difficulty = 100;
+        S.scrollX = 0;
+        S.panelOpen = false;
+        S.mining = false;
+        if (autoActive) stopAuto(false);
+        document.getElementById("overlay").innerHTML = "";
+        // Refresh UI
+        document.getElementById("iName").value = S.name;
+        document.getElementById("bUnit").textContent = S.name;
+        document.getElementById("iBalance").value = S.balance;
+        document.getElementById("sCoin").textContent = S.name;
+        document.getElementById("iMsg").value = "";
+        document.getElementById("mcc").textContent = "0/64";
+        const zp = Math.round(S.zoom * 100) + "%";
+        document.getElementById("zval").textContent = zp;
+        document.getElementById("sZoom").textContent = zp;
+        const tp = Math.round(S.textScale * 100) + "%";
+        document.getElementById("tval").textContent = tp;
+        document.getElementById("sTxt").textContent = tp;
+        updateEnergyUI();
+        jumpToCurrent();
+        renderChain();
+        setStatus("IDLE", "g");
+        showToast("DATABASE PURGED");
+      }
+
       // ══════════════════════ CSV ══════════════════════
       function exportCSV() {
-        let csv = "index,date,message\n";
+        // Header: total mined count on first line so import can restore chain length
+        // without needing a row for every block
+        let csv = `# mined:${S.mined}\nindex,date,message\n`;
+        // Only write rows for blocks that carry a message
         [...S.blocks.entries()]
+          .filter(([, v]) => v.msg && v.msg.trim())
           .sort((a, b) => a[0] - b[0])
           .forEach(([idx, { date, msg }]) => {
             csv += `${idx},"${date}","${(msg || "").replace(/"/g, '""')}"\n`;
@@ -2424,14 +2521,28 @@
 
       function importCSV(text) {
         const lines = text.trim().split("\n");
-        if (!lines.length || !lines[0].toLowerCase().includes("index"))
+        let minedOverride = -1;
+        let headerIdx = 0;
+
+        // Read optional # mined:N meta line
+        if (lines[0] && lines[0].startsWith("# mined:")) {
+          minedOverride = parseInt(lines[0].slice(8));
+          headerIdx = 1;
+        }
+
+        if (
+          !lines[headerIdx] ||
+          !lines[headerIdx].toLowerCase().includes("index")
+        )
           return alert('Invalid CSV: expected header with "index".');
+
         const newBlocks = new Map();
         let maxIdx = -1,
           errs = 0;
-        for (let i = 1; i < lines.length; i++) {
+
+        for (let i = headerIdx + 1; i < lines.length; i++) {
           const line = lines[i].trim();
-          if (!line) continue;
+          if (!line || line.startsWith("#")) continue;
           const parts = parseCSVLine(line);
           const idx = parseInt(parts[0]);
           if (isNaN(idx) || idx < 0) {
@@ -2446,16 +2557,21 @@
           newBlocks.set(idx, { date, msg });
           maxIdx = Math.max(maxIdx, idx);
         }
-        if (!newBlocks.size) return alert("No valid block rows found in CSV.");
+
+        // Restore chain length: prefer explicit header, else derive from last message block
+        const restoredMined = minedOverride > 0 ? minedOverride : maxIdx + 1;
+        if (restoredMined < 1 && newBlocks.size === 0)
+          return alert("No valid data found in CSV.");
+
         S.blocks = newBlocks;
-        S.mined = maxIdx + 1;
-        S.balance = newBlocks.size;
+        S.mined = restoredMined;
+        S.balance = restoredMined; // 1 coin per block
         document.getElementById("iBalance").value = S.balance;
         saveAll();
         jumpToCurrent();
         renderChain();
         alert(
-          `Imported ${newBlocks.size} block(s). Chain at block #${maxIdx}.` +
+          `Imported. Chain restored to ${restoredMined} block(s), ${newBlocks.size} with messages.` +
             (errs ? ` (${errs} rows skipped)` : ""),
         );
       }
@@ -2498,9 +2614,15 @@
         localStorage.setItem("cm_energy", S.energy);
         localStorage.setItem("cm_difficulty", S.difficulty);
         try {
-          const obj = {};
-          S.blocks.forEach((v, k) => (obj[k] = v));
-          localStorage.setItem("cm_blocks", JSON.stringify(obj));
+          // Only persist blocks that have a message or non-empty date worth keeping.
+          // Blocks with empty messages are reconstructable from index alone.
+          const sparse = {};
+          S.blocks.forEach((v, k) => {
+            if (v.msg && v.msg.trim())
+              sparse[k] = v; // has message → keep full
+            else sparse[k] = { date: v.date }; // keep date only
+          });
+          localStorage.setItem("cm_blocks", JSON.stringify(sparse));
         } catch (e) {
           console.warn("localStorage full – block data may not be fully saved");
         }
@@ -2593,6 +2715,9 @@
         .addEventListener("click", () =>
           document.getElementById("csvFile").click(),
         );
+      document
+        .getElementById("btnDelete")
+        .addEventListener("click", openDeleteModal);
       document.getElementById("csvFile").addEventListener("change", (e) => {
         const f = e.target.files[0];
         if (!f) return;
