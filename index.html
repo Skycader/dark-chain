@@ -758,7 +758,250 @@
         min-width: 80px;
       }
 
-      /* ─── MINING PANEL ────────────────────────────── */
+      /* ─── ELECTRICITY BUTTON ─────────────────────── */
+      .elec-wrap {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+      .elec-btn {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        background: rgba(255, 234, 0, 0.06);
+        border: 1px solid rgba(255, 234, 0, 0.35);
+        padding: 4px 10px;
+        cursor: pointer;
+        transition: all 0.15s;
+        position: relative;
+        min-width: 90px;
+      }
+      .elec-btn:hover {
+        background: rgba(255, 234, 0, 0.13);
+        border-color: rgba(255, 234, 0, 0.7);
+        box-shadow: 0 0 12px rgba(255, 234, 0, 0.3);
+      }
+      .elec-lbl {
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: rgba(255, 234, 0, 0.5);
+        text-transform: uppercase;
+      }
+      .elec-val {
+        font-family: "Orbitron", sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--y);
+        text-shadow: 0 0 8px rgba(255, 234, 0, 0.5);
+        letter-spacing: 1px;
+        white-space: nowrap;
+      }
+      .elec-val.low {
+        color: var(--p);
+        text-shadow: 0 0 8px rgba(255, 0, 128, 0.5);
+        animation: lowblink 0.7s ease-in-out infinite;
+      }
+      @keyframes lowblink {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
+
+      .diff-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 234, 0, 0.3);
+        color: rgba(255, 234, 0, 0.6);
+        font-family: "Share Tech Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 1px;
+        padding: 5px 11px;
+        cursor: pointer;
+        transition: all 0.15s;
+        white-space: nowrap;
+      }
+      .diff-btn:hover {
+        border-color: var(--y);
+        color: var(--y);
+        box-shadow: 0 0 10px rgba(255, 234, 0, 0.3);
+      }
+
+      /* ─── MODAL ───────────────────────────────────── */
+      .modal-bg {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.72);
+        z-index: 5000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: mfadein 0.15s ease;
+      }
+      @keyframes mfadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .modal {
+        background: var(--bg2);
+        border: 1px solid var(--c);
+        box-shadow:
+          0 0 60px rgba(0, 245, 255, 0.2),
+          0 0 120px rgba(0, 245, 255, 0.07);
+        padding: 22px 26px;
+        min-width: 300px;
+        position: relative;
+      }
+      .modal .co {
+        border-color: var(--c);
+      }
+      .modal .co.tl {
+        top: -1px;
+        left: -1px;
+        border-width: 2px 0 0 2px;
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-style: solid;
+      }
+      .modal .co.tr {
+        top: -1px;
+        right: -1px;
+        border-width: 2px 2px 0 0;
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-style: solid;
+      }
+      .modal .co.bl {
+        bottom: -1px;
+        left: -1px;
+        border-width: 0 0 2px 2px;
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-style: solid;
+      }
+      .modal .co.br {
+        bottom: -1px;
+        right: -1px;
+        border-width: 0 2px 2px 0;
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        border-style: solid;
+      }
+      .modal-title {
+        font-family: "Orbitron", sans-serif;
+        font-size: 13px;
+        font-weight: 700;
+        color: var(--c);
+        letter-spacing: 3px;
+        text-shadow: 0 0 10px var(--c);
+        margin-bottom: 14px;
+      }
+      .modal-sub {
+        font-size: 12px;
+        color: var(--dim);
+        letter-spacing: 1px;
+        margin-bottom: 12px;
+        line-height: 1.8;
+      }
+      .modal-input {
+        width: 100%;
+        background: var(--panel);
+        border: 1px solid var(--border);
+        color: var(--c);
+        font-family: "Orbitron", sans-serif;
+        font-size: 18px;
+        font-weight: 700;
+        padding: 8px 10px;
+        outline: none;
+        letter-spacing: 2px;
+        transition: all 0.15s;
+      }
+      .modal-input:focus {
+        border-color: var(--c);
+        box-shadow: 0 0 10px rgba(0, 245, 255, 0.3);
+      }
+      .modal-input.y {
+        color: var(--y);
+        border-color: rgba(255, 234, 0, 0.4);
+      }
+      .modal-input.y:focus {
+        border-color: var(--y);
+        box-shadow: 0 0 10px rgba(255, 234, 0, 0.3);
+      }
+      .modal-btns {
+        display: flex;
+        gap: 8px;
+        margin-top: 14px;
+        justify-content: flex-end;
+      }
+      .modal-btns .cb {
+        font-size: 12px;
+        padding: 7px 16px;
+        letter-spacing: 2px;
+      }
+      .modal-close {
+        position: absolute;
+        top: 8px;
+        right: 10px;
+        background: none;
+        border: none;
+        color: var(--dim);
+        cursor: pointer;
+        font-size: 16px;
+        font-family: "Share Tech Mono", monospace;
+        transition: color 0.14s;
+      }
+      .modal-close:hover {
+        color: var(--p);
+      }
+
+      /* ─── ERROR TOAST ─────────────────────────────── */
+      .toast {
+        position: fixed;
+        bottom: 60px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 0, 128, 0.12);
+        border: 1px solid var(--p);
+        color: var(--p);
+        font-family: "Share Tech Mono", monospace;
+        font-size: 13px;
+        letter-spacing: 2px;
+        padding: 10px 22px;
+        z-index: 9995;
+        pointer-events: none;
+        text-transform: uppercase;
+        animation:
+          toastin 0.2s ease,
+          toastout 0.3s ease 1.8s forwards;
+        white-space: nowrap;
+      }
+      @keyframes toastin {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+      @keyframes toastout {
+        to {
+          opacity: 0;
+          transform: translateX(-50%) translateY(8px);
+        }
+      }
       #overlay {
         position: fixed;
         inset: 0;
@@ -1058,7 +1301,10 @@
         position: fixed;
         pointer-events: none;
         z-index: 9990;
-        font-size: 32px;
+        width: 38px;
+        height: 38px;
+        filter: drop-shadow(0 0 6px #00f5ff)
+          drop-shadow(0 0 18px rgba(0, 245, 255, 0.6));
         animation: coinFly 1.1s cubic-bezier(0.2, 0.8, 0.4, 1) forwards;
       }
 
@@ -1096,7 +1342,7 @@
           id="iName"
           class="ci"
           type="text"
-          value="NEONX"
+          value="YMG"
           maxlength="8"
           spellcheck="false"
           autocomplete="off"
@@ -1107,7 +1353,7 @@
         <div class="fl">⬡ miner balance</div>
         <div class="brow2h">
           <input id="iBalance" class="bi" type="number" value="0" step="1" />
-          <span id="bUnit" class="bu2">NEONX</span>
+          <span id="bUnit" class="bu2">YMG</span>
         </div>
       </div>
 
@@ -1116,6 +1362,20 @@
       <div class="mbtns">
         <button class="cb act" id="btnManual">⬡ Manual</button>
         <button class="cb" id="btnAuto">⬡ Auto</button>
+        <div class="tsep" style="height: 20px"></div>
+        <button
+          class="diff-btn"
+          id="btnDiff"
+          title="Set mining difficulty (energy per sector)"
+        >
+          ⚡ <span id="diffVal">100</span>
+        </button>
+        <div class="elec-wrap">
+          <div class="elec-btn" id="btnElec" title="Click to add/remove energy">
+            <span class="elec-lbl">⚡ ENERGY</span>
+            <span class="elec-val" id="elecVal">10 000</span>
+          </div>
+        </div>
       </div>
 
       <div class="apanel" id="apanel" style="display: none">
@@ -1230,7 +1490,7 @@
 
       // ══════════════════════ STATE ══════════════════════
       const S = {
-        name: "NEONX",
+        name: "YMG",
         balance: 0,
         mined: 0,
         blocks: new Map(),
@@ -1245,6 +1505,8 @@
         hashes: 0,
         hs: 0,
         spawnBlock: -1,
+        energy: 10000,
+        difficulty: 100,
       };
 
       // ══════════════════════ ZOOM HELPERS ══════════════════════
@@ -1261,8 +1523,10 @@
       // = (mined blocks + pending block) laid out as slots, minus trailing connector
       function totalPx(z = S.zoom) {
         const n = S.mined + 1;
-        if (n === 1) return LEAD + bw(z) + 4;
-        return LEAD + (n - 1) * bu(z) + bw(z) + 4;
+        const chainW = n === 1 ? bw(z) : (n - 1) * bu(z) + bw(z);
+        // Add half a viewport of right padding so the last block can sit at centre
+        const rightPad = Math.round(vpW() / 2) + bw(z);
+        return LEAD + chainW + rightPad;
       }
 
       function clampScroll(sx, z = S.zoom) {
@@ -1727,10 +1991,16 @@
         if (!S.panelOpen) return;
         const { tried, correct } = S.panel;
         if (tried.has(i)) return;
+
+        // Energy check
+        if (!spendEnergy()) {
+          showToast(`⚡ NOT ENOUGH ENERGY — need ${fmtEnergy(S.difficulty)}`);
+          return;
+        }
+
         tried.add(i);
         S.hashes++;
         if (i === correct) {
-          // grab the button before drawPanel replaces the DOM
           const secBtn = document.querySelectorAll(".sec")[i] || null;
           playSuccess();
           spawnCoin(secBtn);
@@ -1814,6 +2084,12 @@
           }
           const s = secs[si++];
           left--;
+          // Energy check in auto mode
+          if (!spendEnergy()) {
+            stopAuto(false);
+            showToast(`⚡ NOT ENOUGH ENERGY — auto stopped`);
+            return;
+          }
           S.panel.scanning = s;
           S.panel.tried.add(s);
           S.hashes++;
@@ -1877,10 +2153,9 @@
         return new Promise((r) => setTimeout(r, ms));
       }
       function jumpToCurrent() {
-        const n = Math.max(1, Math.floor(vpW() / bu()));
-        // Centre the current (pending) block in view
-        const targetX = LEAD + S.mined * bu() - Math.floor(n / 2) * bu();
-        S.scrollX = clampScroll(targetX);
+        // Position scrollX so the current (pending) block sits at viewport centre
+        const blockCentreX = LEAD + S.mined * bu() + bw() / 2;
+        S.scrollX = clampScroll(blockCentreX - vpW() / 2);
       }
 
       // Block textarea input — syncs without re-rendering chain
@@ -1957,7 +2232,6 @@
 
       // ── COIN ANIMATION ──────────────────────────────────
       function spawnCoin(sourceEl) {
-        // sourceEl: a DOM element to fly from; fallback to viewport centre
         let cx, cy;
         if (sourceEl) {
           const r = sourceEl.getBoundingClientRect();
@@ -1969,11 +2243,167 @@
         }
         const coin = document.createElement("div");
         coin.className = "coin-anim";
-        coin.textContent = "🪙";
-        coin.style.left = cx - 16 + "px";
+        // Cyberpunk hexagonal token — neon cyan with pink accent
+        coin.innerHTML = `<svg width="38" height="38" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <radialGradient id="crbg" cx="40%" cy="35%">
+        <stop offset="0%"   stop-color="#0a1a1a"/>
+        <stop offset="100%" stop-color="#020208"/>
+      </radialGradient>
+    </defs>
+    <!-- hex body -->
+    <polygon points="19,2 33,10 33,28 19,36 5,28 5,10"
+      fill="url(#crbg)" stroke="#00f5ff" stroke-width="1.6"/>
+    <!-- inner hex ring -->
+    <polygon points="19,7 28,12 28,26 19,31 10,26 10,12"
+      fill="none" stroke="rgba(0,245,255,.25)" stroke-width="1"/>
+    <!-- cross-hair lines -->
+    <line x1="19" y1="2"  x2="19" y2="7"  stroke="#00f5ff" stroke-width="1" opacity=".7"/>
+    <line x1="19" y1="31" x2="19" y2="36" stroke="#00f5ff" stroke-width="1" opacity=".7"/>
+    <line x1="5"  y1="10" x2="10" y2="12" stroke="#00f5ff" stroke-width="1" opacity=".7"/>
+    <line x1="33" y1="10" x2="28" y2="12" stroke="#00f5ff" stroke-width="1" opacity=".7"/>
+    <line x1="5"  y1="28" x2="10" y2="26" stroke="#00f5ff" stroke-width="1" opacity=".7"/>
+    <line x1="33" y1="28" x2="28" y2="26" stroke="#00f5ff" stroke-width="1" opacity=".7"/>
+    <!-- centre symbol -->
+    <circle cx="19" cy="19" r="4.5" fill="none" stroke="#ff0080" stroke-width="1.4"/>
+    <circle cx="19" cy="19" r="1.5" fill="#ff0080"/>
+    <!-- ⬡ label -->
+    <text x="19" y="18.5" text-anchor="middle" dominant-baseline="middle"
+      font-family="'Orbitron',monospace" font-size="5.5" font-weight="700"
+      fill="#00f5ff" letter-spacing="0.5">${S.name.slice(0, 4)}</text>
+  </svg>`;
+        coin.style.left = cx - 19 + "px";
         coin.style.top = cy + "px";
         document.body.appendChild(coin);
         setTimeout(() => coin.remove(), 1300);
+      }
+
+      // ══════════════════════ ENERGY ══════════════════════
+      function fmtEnergy(n) {
+        if (Math.abs(n) >= 1e9)
+          return (n / 1e9).toFixed(1).replace(".0", "") + "G";
+        if (Math.abs(n) >= 1e6)
+          return (n / 1e6).toFixed(1).replace(".0", "") + "M";
+        if (Math.abs(n) >= 1000)
+          return (n / 1000).toFixed(1).replace(".0", "") + "K";
+        return String(n);
+      }
+
+      function updateEnergyUI() {
+        const el = document.getElementById("elecVal");
+        if (!el) return;
+        el.textContent = fmtEnergy(S.energy);
+        el.className = "elec-val" + (S.energy < S.difficulty ? " low" : "");
+        document.getElementById("diffVal").textContent = fmtEnergy(
+          S.difficulty,
+        );
+      }
+
+      function spendEnergy() {
+        // Returns true if energy deducted, false if insufficient
+        if (S.energy < S.difficulty) return false;
+        S.energy -= S.difficulty;
+        updateEnergyUI();
+        saveAll();
+        return true;
+      }
+
+      function showToast(msg) {
+        const t = document.createElement("div");
+        t.className = "toast";
+        t.textContent = msg;
+        document.body.appendChild(t);
+        setTimeout(() => t.remove(), 2200);
+      }
+
+      // ── Modals ──────────────────────────────────────
+      function openEnergyModal() {
+        const bg = document.createElement("div");
+        bg.className = "modal-bg";
+        bg.id = "modal-energy";
+        bg.innerHTML = `<div class="modal">
+    <div class="co tl"></div><div class="co tr"></div>
+    <div class="co bl"></div><div class="co br"></div>
+    <button class="modal-close" onclick="closeModal('modal-energy')">✕</button>
+    <div class="modal-title">⚡ ENERGY BALANCE</div>
+    <div class="modal-sub">
+      Current: <span style="color:var(--y)">${fmtEnergy(S.energy)}</span> units<br>
+      Enter amount to add (negative to deduct):
+    </div>
+    <input class="modal-input y" id="mEnergyIn" type="number" value="1000" placeholder="±amount">
+    <div class="modal-btns">
+      <button class="cb" onclick="closeModal('modal-energy')">CANCEL</button>
+      <button class="cb gn" onclick="applyEnergy()">⚡ APPLY</button>
+    </div>
+  </div>`;
+        bg.addEventListener("click", (e) => {
+          if (e.target === bg) closeModal("modal-energy");
+        });
+        document.body.appendChild(bg);
+        setTimeout(() => {
+          const i = document.getElementById("mEnergyIn");
+          if (i) {
+            i.focus();
+            i.select();
+          }
+        }, 50);
+      }
+
+      function applyEnergy() {
+        const delta =
+          parseFloat(document.getElementById("mEnergyIn")?.value) || 0;
+        S.energy = Math.max(0, S.energy + delta);
+        updateEnergyUI();
+        saveAll();
+        closeModal("modal-energy");
+      }
+
+      function openDiffModal() {
+        const bg = document.createElement("div");
+        bg.className = "modal-bg";
+        bg.id = "modal-diff";
+        bg.innerHTML = `<div class="modal">
+    <div class="co tl"></div><div class="co tr"></div>
+    <div class="co bl"></div><div class="co br"></div>
+    <button class="modal-close" onclick="closeModal('modal-diff')">✕</button>
+    <div class="modal-title">⚡ MINING DIFFICULTY</div>
+    <div class="modal-sub">
+      Energy cost per sector attempt.<br>
+      Current: <span style="color:var(--y)">${fmtEnergy(S.difficulty)}</span> units/sector<br><br>
+      Higher difficulty = more energy per try.
+    </div>
+    <input class="modal-input y" id="mDiffIn" type="number" value="${S.difficulty}" min="1" placeholder="units per sector">
+    <div class="modal-btns">
+      <button class="cb" onclick="closeModal('modal-diff')">CANCEL</button>
+      <button class="cb gn" onclick="applyDiff()">SET</button>
+    </div>
+  </div>`;
+        bg.addEventListener("click", (e) => {
+          if (e.target === bg) closeModal("modal-diff");
+        });
+        document.body.appendChild(bg);
+        setTimeout(() => {
+          const i = document.getElementById("mDiffIn");
+          if (i) {
+            i.focus();
+            i.select();
+          }
+        }, 50);
+      }
+
+      function applyDiff() {
+        const v = parseInt(document.getElementById("mDiffIn")?.value);
+        if (!isNaN(v) && v >= 1) {
+          S.difficulty = v;
+          updateEnergyUI();
+          saveAll();
+        }
+        closeModal("modal-diff");
+      }
+
+      function closeModal(id) {
+        const el = document.getElementById(id);
+        if (el) el.remove();
       }
 
       // ══════════════════════ CSV ══════════════════════
@@ -2065,6 +2495,8 @@
         localStorage.setItem("cm_mined", S.mined);
         localStorage.setItem("cm_zoom", S.zoom);
         localStorage.setItem("cm_textScale", S.textScale);
+        localStorage.setItem("cm_energy", S.energy);
+        localStorage.setItem("cm_difficulty", S.difficulty);
         try {
           const obj = {};
           S.blocks.forEach((v, k) => (obj[k] = v));
@@ -2074,13 +2506,16 @@
         }
       }
       function loadAll() {
-        S.name = localStorage.getItem("cm_name") || "NEONX";
+        S.name = localStorage.getItem("cm_name") || "YMG";
         S.balance = parseFloat(localStorage.getItem("cm_balance")) || 0;
         S.mined = parseInt(localStorage.getItem("cm_mined")) || 0;
         S.zoom = parseFloat(localStorage.getItem("cm_zoom")) || 2.5;
         S.zoom = Math.max(0.1, Math.min(2.5, S.zoom));
         S.textScale = parseFloat(localStorage.getItem("cm_textScale")) || 1.75;
         S.textScale = Math.max(1.0, Math.min(5.0, S.textScale));
+        S.energy = parseFloat(localStorage.getItem("cm_energy")) ?? 10000;
+        if (isNaN(S.energy)) S.energy = 10000;
+        S.difficulty = parseInt(localStorage.getItem("cm_difficulty")) || 100;
         try {
           const raw = localStorage.getItem("cm_blocks");
           if (raw) {
@@ -2113,6 +2548,12 @@
       document
         .getElementById("btnStop")
         .addEventListener("click", () => stopAuto(false));
+      document
+        .getElementById("btnElec")
+        .addEventListener("click", openEnergyModal);
+      document
+        .getElementById("btnDiff")
+        .addEventListener("click", openDiffModal);
 
       document.getElementById("btnJump").addEventListener("click", () => {
         jumpToCurrent();
@@ -2178,6 +2619,7 @@
         document.getElementById("sTxt").textContent = tpct;
         jumpToCurrent();
         renderChain();
+        updateEnergyUI();
         setStatus("IDLE", "g");
       })();
     </script>
